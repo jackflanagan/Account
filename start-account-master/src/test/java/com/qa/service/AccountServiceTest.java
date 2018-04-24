@@ -17,8 +17,8 @@ public class AccountServiceTest {
 	@Before
 	public void init() {
 		service = new AccountService();
-		joeBloggs = new Account("Joe", "Bloggs", "1234");
-		janeBloggs = new Account("Jane", "Bloggs", "1234");
+		joeBloggs = new Account("0","Joe", "Bloggs", "1234");
+		janeBloggs = new Account("1","Jane", "Bloggs", "1234");
 		util = new JSONUtil();
 	}
 
@@ -53,7 +53,7 @@ public class AccountServiceTest {
 		Assert.assertEquals(service.getNumberOfAccountWithFirstName("Joe"), 0);
 		service.addAccountFromMap(joeBloggs);
 		Assert.assertEquals(service.getNumberOfAccountWithFirstName("Joe"), 1);
-		Account joeGordon = new Account("Joe", "Gordon", "1234");
+		Account joeGordon = new Account("4","Joe", "Jimmy", "1234");
 		service.addAccountFromMap(joeGordon);
 		Assert.assertEquals(service.getNumberOfAccountWithFirstName("Joe"), 2);
 	}
