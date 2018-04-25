@@ -17,13 +17,14 @@ public class App {
 		String mapAsJSON = util.getJSONForObject(service.getAccountMap());
 		System.out.println("This is the account map as JSON " + mapAsJSON);
 
+		/*
 		RepositoryLayer rl = new RepositoryLayer();
 		rl.findAccount();
 		rl.getAllAccount();
 		rl.createAccount("");
 		rl.deleteAccount();
 		rl.updateAccount();
-		
+		*/
 		
 		
 		

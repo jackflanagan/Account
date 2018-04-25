@@ -42,7 +42,7 @@ public class RepositoryTest {
 	
 	
 
-	private static final String MOCK_OBJECT = "[{\"ID\":\"1\",\"firstName\":\"John\",\"lastName\":\"Doe\"\",\"accountNumber\":\"1236\"}]";
+	private static final String MOCK_OBJECT = "[{\"id\":\"0\",\"firstName\":\"John\",\"secondName\":\"Doe\",\"accountNumber\":\"1234\"}]";
 	
 	@Before
 	public void setup() {
@@ -62,28 +62,26 @@ public class RepositoryTest {
 	
 	@Test
 	public void testCreateAccount() {
+		
+		
 		String reply = repo.createAccount(MOCK_DATA_ARRAY);
 		Assert.assertEquals(reply, "{\"message\": \"account sucessfully added\"}");
 	}
 	
-	@Test
-	public void testDeleteAccount() {
-		String reply = repo.deleteAccount();
-		System.out.println("hello"+reply);
-		Assert.assertEquals(reply, "{\"message\": \"account sucessfully deleted\"}");
-	}
+
 	@Test
 	public void testUpdateAccount() {
-		String reply = repo.updateAccount();
+		String reply = repo.updateAccount(1L, MOCK_OBJECT);
 		Assert.assertEquals(reply, "{\"message\": \"account sucessfully updated\"}");
 	}
 	
 	@Test
-	public void testFindAccount() {
-		Mockito.when(manager.createQuery(Mockito.anyString())).thenReturn(query);
-		
-		
+	public void testDeleteanAccount() {
+		String reply = repo.deleteanAccount(1L);
+		Assert.assertEquals(reply, "{\"message\": \"account sucessfully deleted\"}");
 	}
+	
+	
 	
 
 }

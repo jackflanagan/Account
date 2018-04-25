@@ -3,8 +3,11 @@ package com.qa.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.enterprise.inject.Alternative;
+
 import com.qa.domain.Account;
 
+@Alternative
 public class AccountService {
 
 	private Map<Integer, Account> accountMap;
