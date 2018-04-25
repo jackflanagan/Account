@@ -11,7 +11,7 @@ public class Account {
 	
 	@GeneratedValue
 	@Id 
-	private int id;
+	private String id;
 	@Column
 	private String firstName;
 	@Column
@@ -23,12 +23,22 @@ public class Account {
 		
 	}
 
-	public Account(String firstName, String secondName, String accountNumber) {
+	public Account(String id, String firstName, String secondName, String accountNumber) {
+		this.id = id;
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.accountNumber = accountNumber;
 	}
 
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
