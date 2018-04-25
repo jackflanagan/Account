@@ -36,34 +36,46 @@ public class RepositoryLayer {
 		
 	}
 	
-	public String findAccount() {
-		TypedQuery<Account> query = manager.createQuery("Select a FROM ACCOUNT WHERE FIRSTNAME = 'John'", Account.class);
-		Collection <Account> ac = (Collection<Account>) query.getResultList();
-		return util.getJSONForObject(ac);
-	}
+	
 	
 	@Transactional(REQUIRED)
 	public String createAccount(String ac) {
-		
-		Account createAccount1 = util.getObjectForJSON(ac, Account.class);
-		manager.persist(createAccount1);
+		Collection <Account> ac1 = (Collection<Account>) util.getObjectForJSON(ac, Account.class);
+		//Account createAccount1 = util.getObjectForJSON(ac, Account.class);
+		manager.persist(ac1);
 		return "{\"message\": \"account sucessfully added\"}";
 		
 	}
 	@Transactional(REQUIRED)
-	public String updateAccount() {
-		
-		TypedQuery<Account> query = manager.createQuery("update ACCOUNT SET FIRSTNAME = 'JANE'  WHERE ID = 2", Account.class);
-		query.executeUpdate();
+	public String updateAccount(Long id, String accountToUpdate) {
+		Account updatedAccount = util.getObjectForJSON(accountToUpdate, Account.class);
+		Account accountFromDB = findAccount(id);
+		if (accountToUpdate != null) {
+			accountFromDB = updatedAccount;
+			manager.merge(accountFromDB);
+		}
 		return "{\"message\": \"account sucessfully updated\"}";
-		
 	}
+	
+	/*
 	@Transactional(REQUIRED)
 	public String deleteAccount() {
 		TypedQuery<Account> query = manager.createQuery("DELETE FROM ACCOUNT WHERE ID = 1", Account.class);
-		query.executeUpdate();
+		//query.executeUpdate();
+		Collection <Account> ac = (Collection<Account>) query.getResultList();
+	
 		return "{\"message\": \"account sucessfully deleted\"}";
 		
+	}
+	*/
+	
+	@Transactional(REQUIRED)
+	public String deleteanAccount(Long id) {
+		Account accountInDB = findAccount(id);
+		if (accountInDB != null) {
+			manager.remove(accountInDB);
+		}
+		return "{\"message\": \"account sucessfully deleted\"}";
 	}
 	
 	public void setManager(EntityManager manager) {
@@ -74,8 +86,7 @@ public class RepositoryLayer {
 		this.util = util;
 	}
 	
-	public static void hi() {
-		
+	private Account findAccount(Long id) {
+		return manager.find(Account.class, id);
 	}
-
 }

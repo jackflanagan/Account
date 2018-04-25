@@ -31,11 +31,11 @@ public class AccountServiceBusinessLayer implements DBImplementation {
 	}
 	@Override
 	public String updateAccount() {
-		return rp.updateAccount();
+		return rp.updateAccount(null, null);
 	}
 	@Override
 	public String deleteAccout() {
-		return rp.deleteAccount();
+		return rp.deleteanAccount(null);
 	}
 	
 	public void setRepoLayer(RepositoryLayer rp) {
